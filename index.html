@@ -1,0 +1,579 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIY Craft Supplies</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <div class="header">
+        <div class="container">
+
+            <div class="navbar">
+
+                <div class="logo">
+                    <img src="diy.png" width="200" alt="DIY Craft Supplies">
+                </div>
+
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#account">Account</a></li>
+                    </ul>
+                </nav>
+
+                <a href="#cart" id="cartLink" aria-label="Shopping cart">
+                    <img src="cart1.png" width="30" height="30" alt="Cart">
+                    <span id="cartCount" class="cart-count">0</span>
+                </a>
+
+                <a href="#wishlist" id="wishlistLink" class="wishlist-link">
+                    <span class="wishlist-heart">&#9825;</span>
+                    <span id="wishlistCount" class="cart-count">0</span>
+                </a>
+
+                <img src="menu.png"
+                     class="Menu-icon"
+                     width="30"
+                     height="30"
+                     alt="Menu"
+                     onclick="menutoggle()">
+
+            </div>
+
+            <!-- HERO -->
+
+            <div class="row hero-row" id="home">
+
+                <div class="col-2">
+                    <h1>Crafting Magic!!<br>Explore Our Supplies Collection</h1>
+
+                    <p>
+                        Unleash your inner artist with our curated selection
+                        of DIY craft supplies, tailored to fuel your
+                        imaginative flair.
+                    </p>
+
+                    <a href="#products" class="btn" id="exploreBtn">
+                        Explore Now &#8594;
+                    </a>
+                </div>
+
+                <div class="col-2">
+                    <img src="diy craft.png" alt="DIY Craft Supplies">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CATEGORIES -->
+
+    <div class="categories">
+        <div class="small-container">
+            <div class="row">
+
+                <div class="col-3">
+                    <img src="1.png" alt="Craft category 1">
+                </div>
+
+                <div class="col-3">
+                    <img src="2.png" alt="Craft category 2">
+                </div>
+
+                <div class="col-3">
+                    <img src="3.png" alt="Craft category 3">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- PRODUCTS -->
+
+    <div class="small-container" id="products">
+
+        <div class="product-controls">
+
+            <input type="search"
+                   id="searchInput"
+                   placeholder="Search craft products..."
+                   aria-label="Search products">
+
+            <select id="categoryFilter" aria-label="Filter products">
+                <option value="all">All Categories</option>
+                <option value="Drawing">Drawing</option>
+                <option value="Craft">Craft</option>
+                <option value="Paper Craft">Paper Craft</option>
+                <option value="Painting">Painting</option>
+                <option value="DIY">DIY</option>
+            </select>
+
+            <button type="button" id="clearFilters" class="btn">
+                Clear Filters
+            </button>
+
+        </div>
+
+        <h2 class="title" id="featuredTitle">Featured Products</h2>
+        <div class="row" id="featuredProducts"></div>
+
+        <h2 class="title" id="latestTitle">Latest Products</h2>
+        <div class="row" id="latestProducts"></div>
+
+        <p id="noResultsMessage"
+           class="product-message"
+           style="display:none;">
+            No products found. Try another search or category.
+        </p>
+
+    </div>
+
+
+    <!-- SHOPPING CART -->
+
+    <section class="cart-section" id="cart">
+
+        <div class="small-container">
+
+            <h2 class="title">Your Shopping Cart</h2>
+
+            <div id="cartItems"></div>
+
+            <p id="emptyCartMessage" class="cart-message">
+                Your cart is empty. Add some craft supplies!
+            </p>
+
+            <div id="cartSummary" class="cart-summary" style="display:none;">
+
+                <p>
+                    Total Items:
+                    <strong id="cartQuantityTotal">0</strong>
+                </p>
+
+                <h3>
+                    Total Price:
+                    <span id="cartTotal">$0.00</span>
+                </h3>
+
+                <button type="button" class="btn" id="clearCartBtn">
+                    Clear Cart
+                </button>
+
+                <button type="button"
+                        class="btn checkout-btn"
+                        id="proceedToCheckoutBtn">
+                    Proceed to Checkout &#8594;
+                </button>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CHECKOUT SECTION -->
+
+    <section class="checkout-section"
+             id="checkout"
+             style="display:none;">
+
+        <div class="small-container">
+
+            <h2 class="title">Checkout</h2>
+
+            <p class="checkout-intro">
+                Please enter your delivery details to continue.
+            </p>
+
+            <div class="checkout-layout">
+
+                <!-- CUSTOMER DETAILS FORM -->
+
+                <div class="checkout-form-container">
+
+                    <h3>Customer Information</h3>
+
+                    <form id="checkoutForm">
+
+                        <label for="customerName">Full Name</label>
+
+                        <input
+                            type="text"
+                            id="customerName"
+                            name="customerName"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            minlength="2"
+                            required
+                        >
+
+                        <label for="customerEmail">Email Address</label>
+
+                        <input
+                            type="email"
+                            id="customerEmail"
+                            name="customerEmail"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                        <label for="customerPhone">Mobile Number</label>
+
+                        <input
+                            type="tel"
+                            id="customerPhone"
+                            name="customerPhone"
+                            placeholder="Enter 10-digit mobile number"
+                            pattern="[6-9][0-9]{9}"
+                            maxlength="10"
+                            autocomplete="tel"
+                            title="Enter a valid 10-digit Indian mobile number"
+                            required
+                        >
+
+                        <label for="customerAddress">Delivery Address</label>
+
+                        <textarea
+                            id="customerAddress"
+                            name="customerAddress"
+                            placeholder="Enter your full delivery address"
+                            rows="4"
+                            minlength="10"
+                            autocomplete="street-address"
+                            required
+                        ></textarea>
+
+                        <label for="customerCity">City</label>
+
+                        <input
+                            type="text"
+                            id="customerCity"
+                            name="customerCity"
+                            placeholder="Enter your city"
+                            autocomplete="address-level2"
+                            required
+                        >
+
+                        <label for="customerPincode">PIN Code</label>
+
+                        <input
+                            type="text"
+                            id="customerPincode"
+                            name="customerPincode"
+                            placeholder="Enter 6-digit PIN code"
+                            pattern="[0-9]{6}"
+                            maxlength="6"
+                            inputmode="numeric"
+                            autocomplete="postal-code"
+                            required
+                        >
+
+                        <label for="paymentMethod">Payment Method</label>
+
+                        <select
+                            id="paymentMethod"
+                            name="paymentMethod"
+                            required
+                        >
+                            <option value="">Select Payment Method</option>
+                            <option value="Cash on Delivery">Cash on Delivery</option>
+                            <option value="UPI (Demo)">UPI (Demo Only)</option>
+                        </select>
+
+                        <p class="demo-note">
+                            This is a demonstration website.
+                            No real payment will be processed.
+                        </p>
+
+                        <button type="submit" class="btn">
+                            Continue to Order Review
+                        </button>
+
+                        <button type="button"
+                                class="back-cart-btn"
+                                id="backToCartBtn">
+                            &#8592; Back to Cart
+                        </button>
+
+                        <p id="checkoutMessage"
+                           class="checkout-message"
+                           aria-live="polite"></p>
+
+                    </form>
+
+                </div>
+
+
+                <!-- ORDER SUMMARY -->
+
+                <div class="checkout-summary">
+
+                    <h3>Order Summary</h3>
+
+                    <div id="checkoutOrderItems"></div>
+
+                    <hr>
+
+                    <p>
+                        Total Quantity:
+                        <strong id="checkoutOrderQuantity">0</strong>
+                    </p>
+
+                    <h3 class="checkout-grand-total">
+                        Total:
+                        <span id="checkoutOrderTotal">$0.00</span>
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- WISHLIST -->
+
+    <section class="wishlist-section" id="wishlist">
+
+        <div class="small-container">
+
+            <h2 class="title">My Wishlist</h2>
+
+            <p id="emptyWishlistMessage" class="cart-message">
+                Your wishlist is empty. Save your favourite products!
+            </p>
+
+            <div class="row" id="wishlistItems"></div>
+
+        </div>
+    </section>
+
+
+    <!-- OFFER SECTION -->
+
+    <div class="offer" id="about">
+
+        <div class="small-container">
+
+            <div class="row">
+
+                <div class="col-2">
+                    <img src="spl1.png"
+                         class="offer-img"
+                         alt="Buransh Scrapbook Kit">
+                </div>
+
+                <div class="col-2">
+
+                    <p>Exclusively Available on DIY Craft Supplies</p>
+
+                    <h1>BURANSH Scrapbook Kit</h1>
+
+                    <small>
+                        Buransh 348pcs Scrapbook Kit Bullet Junk Journal Kit
+                        with Journaling Scrapbooking Supplies Stationery A6
+                        Grid Notebook with Graph Ruled Pages DIY Scrapbook
+                        Gift for Girl Kid Women (Moonlight)
+                    </small>
+
+                    <br>
+
+                    <button class="btn" id="offerBuyBtn">
+                        Buy Now &#8594;
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- TESTIMONIALS -->
+
+    <div class="testimonial">
+
+        <div class="small-container">
+
+            <div class="row">
+
+                <div class="col-3">
+
+                    <i class="fa-solid fa-quote-left"></i>
+
+                    <p>
+                        This Store showed some great brushes for ink blending.
+                        These are made of lots of soft bristles and are great
+                        for doing stencils.
+                    </p>
+
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+
+                    <img src="u1.png" alt="Customer">
+                    <h3>Qunicas Moreira</h3>
+
+                </div>
+
+
+                <div class="col-3">
+
+                    <i class="fa-solid fa-quote-left"></i>
+
+                    <p>
+                        I love the coloured buttons very much. I mostly
+                        ordered scrapbook supplies. I'm pleasantly
+                        surprised at the quality.
+                    </p>
+
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+
+                    <img src="u3.png" alt="Customer">
+                    <h3>Rae Dizzle</h3>
+
+                </div>
+
+
+                <div class="col-3">
+
+                    <i class="fa-solid fa-quote-left"></i>
+
+                    <p>
+                        I love the products on this website. I mostly
+                        ordered scrapbook supplies. I'm pleasantly
+                        surprised at the quality.
+                    </p>
+
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+
+                    <img src="u2.png" alt="Customer">
+                    <h3>Kristin Kay</h3>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- BRANDS -->
+
+    <div class="brands">
+
+        <div class="small-container">
+
+            <div class="row">
+
+                <div class="col-5"><img src="b1.png" alt="Brand 1"></div>
+                <div class="col-5"><img src="b2.png" alt="Brand 2"></div>
+                <div class="col-5"><img src="b6.png" alt="Brand 3"></div>
+                <div class="col-5"><img src="b4.png" alt="Brand 4"></div>
+                <div class="col-5"><img src="b5.png" alt="Brand 5"></div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer" id="contact">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android and iOS mobile phone.</p>
+
+                    <div class="app-logo">
+                        <img src="ap1.png" alt="Google Play">
+                        <img src="ap2.png" alt="App Store">
+                    </div>
+                </div>
+
+                <div class="footer-col-2">
+                    <img src="diy.png" alt="DIY Craft Supplies">
+                    <p>
+                        Our purpose is to sustainably make the pleasure
+                        and benefits of crafts accessible to the many.
+                    </p>
+                </div>
+
+                <div class="footer-col-3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="#" id="couponsLink">Coupons</a></li>
+                        <li><a href="#" id="blogLink">Blog Post</a></li>
+                        <li><a href="#" id="returnLink">Return Policy</a></li>
+                        <li><a href="#" id="affiliateLink">Join Affiliate</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col-4">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>YouTube</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <hr>
+
+            <p class="copyright">
+                Copyright 2023 - Crafting Supplies
+            </p>
+
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="./script.js"></script>
+
+</body>
+</html>
